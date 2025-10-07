@@ -2,12 +2,12 @@ data "vkcs_kubernetes_clustertemplate" "k8s-template" {
   version = "1.31"
 }
 
-# Master node - минимальная рекомендуемая конфигурация
+
 data "vkcs_compute_flavor" "k8s-master-flavor" {
   name = "STD2-2-8"
 }
 
-# Worker node - минимальная возможная конфигурация
+
 data "vkcs_compute_flavor" "k8s-node-group-flavor" {
   name = "STD2-1-2"
 }
@@ -59,7 +59,7 @@ data "vkcs_kubernetes_addons" "available" {
 data "vkcs_kubernetes_addon" "cert_manager" {
   cluster_id = vkcs_kubernetes_cluster.k8s-cluster.id
   name       = "cert-manager"
-  version    = "1.16.3"  # Указываем конкретную версию
+  version    = "1.16.3"  
 }
 
 # Установка cert-manager как аддона
