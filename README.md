@@ -1,6 +1,5 @@
 # Развертывание Kubernetes Cluster
 
-####1. Создание ресурсов vk-cloud
 Для задания были созданы: сеть, роутер, подсеть, инстанс Kubernetes cluster, Kubernetes node-group и аддон cert-manager.
 
 ## 🚀 Быстрый старт
@@ -33,17 +32,17 @@ terraform apply -var-file="secret.tfvars"
 После успешного развертывания выполните:
 
 ```bash
-#Сохраните файл конфигурации кластера, измените на него права и добавьте путь к нему в переменную
+# Сохраните файл конфигурации кластера, измените на него права и добавьте путь к нему в переменную
 sudo chmod 0600 configuration.yaml
 $env:KUBECONFIG=../../configuration.yaml
-#Проверьте подключение к кластреру
+# Проверьте подключение к кластреру
 kubectl cluster-info
-#Ожидаемый вывод:
-#Kubernetes control plane is running at...
-#CoreDNS is running at...
-#Создайте сертификат
+# Ожидаемый вывод:
+# Kubernetes control plane is running at...
+# CoreDNS is running at...
+# Создайте сертификат
 kubectl apply -f test-resources.yaml
-#Проверьте его с помощью describe
+# Проверьте его с помощью describe
 kubectl describe certificate -n cert-manager-test
 ```
 
