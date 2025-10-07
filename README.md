@@ -1,15 +1,15 @@
-# Развертывание СУБД PaaS при помощи Terraform
+# Развертывание Kubernetes Cluster
 
 1. Создание ресурсов vk-cloud
-Для задания были созданы: сеть, роутер, подсеть, инстанс базы данных с пользователем, виртуальная машина, с помощью которой происходило подключение к базе данных.
+Для задания были созданы: сеть, роутер, подсеть, инстанс Kubernetes cluster, Kubernetes node-group и аддон cert-manager.
 
 ## 🚀 Быстрый старт
 
 ### 1. Клонирование репозитория
 
 ```bash
-git clone https://github.com/somebodyaroundthere/db__vkcloud_terraform.git
-cd db_vkcloud_terraform
+git clone https://github.com/somebodyaroundthere/k8s_vkcloud_terraform.git
+cd k8s_vkcloud_terraform
 ```
 
 ### 2. Настройка переменных
@@ -28,23 +28,32 @@ terraform plan -var-file="secret.tfvars"
 # Развертывание инфраструктуры
 terraform apply -var-file="secret.tfvars"
 ```
-### 4. Подключение вм к базе данных
+### 4. Создание самоподписанного сертификата
 
 После успешного развертывания выполните:
 
 ```bash
-sudo apt update
-sudo apt install mysql-client-core-8
-pip install mysql-connector-python dotenv
-python3 script.py
+#Сохраните файл конфигурации кластера, измените на него права и добавьте путь к нему в переменную
+sudo chmod 0600 configuration.yaml
+$env:KUBECONFIG=../../configuration.yaml
+#Проверьте подключение к кластреру
+kubectl cluster-info
+#Ожидаемый вывод:
+#Kubernetes control plane is running at...
+#CoreDNS is running at...
+#Создайте сертификат
+kubectl apply -f test-resources.yaml
+#Проверьте его с помощью describe
+kubectl describe certificate -n cert-manager-test
 ```
 
 ## 📁 Структура проекта
 
 ```text
 mysql-database-terraform/
-├── main.tf                 # Основная конфигурация Terraform
-├── variables.tf            # Определение переменных
-├── vkcs_provider.tf        # Настройка провайдера VK Cloud
-├── script.py               # Скрипт заполнения БД тестовыми данными
+├── main2.tf             # Основная конфигурация Terraform
+├── variables.tf         # Определение переменных
+├── provider.tf          # Настройка провайдера VK Cloud
+├── network.tf           # Конфигурация сети
+├── test-resources.yaml  # Манифест создания самоподписанного сертификата
 ```
