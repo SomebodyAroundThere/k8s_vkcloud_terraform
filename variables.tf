@@ -1,0 +1,15 @@
+variable "username" {
+  description = "VK Cloud username email"
+  type        = string
+}
+
+variable "password" {
+  description = "VK Cloud password"
+  type        = string
+  sensitive   = true
+}
+
+variable "project_id" {
+  description = "VK Cloud project ID"
+  type        = string
+}
