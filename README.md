@@ -1,6 +1,6 @@
 # Развертывание Kubernetes Cluster
 
-1. Создание ресурсов vk-cloud
+####1. Создание ресурсов vk-cloud
 Для задания были созданы: сеть, роутер, подсеть, инстанс Kubernetes cluster, Kubernetes node-group и аддон cert-manager.
 
 ## 🚀 Быстрый старт
