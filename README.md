@@ -49,7 +49,7 @@ kubectl describe certificate -n cert-manager-test
 ## 📁 Структура проекта
 
 ```text
-mysql-database-terraform/
+k8s_vkcloud_terraform/
 ├── main2.tf             # Основная конфигурация Terraform
 ├── variables.tf         # Определение переменных
 ├── provider.tf          # Настройка провайдера VK Cloud
